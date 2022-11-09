@@ -1,0 +1,215 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;/*tamanho da caixa, a partir da borda*/
+}
+/*criando variavel de cor na raiz do HTML*/
+:root {
+    --cor-borda-titulo-cartao: #746615;
+    --cores-primarias-cartao: #f7dd43;
+    --cor-fundo-cartao: #1d1c19;
+}
+body.blue {
+    --cor-borda-titulo-cartao: #338Af3;
+    --cores-primarias-cartao: #338Af3;
+    --cor-fundo-cartao: #202024;
+}
+body.green {
+    --cor-borda-titulo-cartao: #047c3f;
+    --cores-primarias-cartao: #047c3f;
+    --cor-fundo-cartao: #1a1f1b;
+}
+ul {
+   list-style: none;
+}
+/*config. plano de fundo da pagina*/
+body {
+    background-color: #131412;/*cor de fundo da pagina*/
+    background-image: url(./assets/bg.svg);/*imagem de fundo da pagina*/
+    background-position-x: center ;/*posicao eixo x da pagina*/
+    background-position-y: -715px;/*posicao eixo y da pagina*/
+}
+/*configurando fonte para tod caixa body*/
+body * {
+    font-family: 'Roboto', sans-serif;/*(sem-serif)sem o risquinho de acabamento da letra*/
+}
+/*configurando estrutura do cartao*/
+#app {   
+    width: fit-content; /*largura:encaixa conteudo*/
+    margin: 52px auto;/*margem: superior, largura altomatica*/
+}
+/*config. espacamento entre logo e cartao*/
+header {
+    margin-bottom: 63px;/*margem a baixo*/
+    text-align: center;/*centralizando lôgo*/
+}
+#cards {
+    display:  flex;/*desbloquea + propriedades*/
+    flex-direction: column;/*alinha os cartoes em colunas*/
+    gap: 32px;/*espaco entre cartoes*/
+}
+/*caixa do cartao (preto)*/
+.card {   
+    padding: 32px 32px;/*preenchimento*/
+    text-align: center;/*alinhamento do texto*/
+    background: var(--cor-fundo-cartao);/*cor de fundo*/
+    border-bottom: 2px solid var(--cores-primarias-cartao);/*borda a baixo(variavel com a cor definida no inicio do codigo)*/
+    border-radius: 6px;/*arredondamento de bordas*/
+}
+/*config. do cartao (caixa data e dia)*/
+.card h2 {
+    display: flex;
+    gap: 16px;
+    justify-content: center;/*justifica tudo no centro*/
+    align-items: center;/*alinha tudo no centro*/
+    padding: 8px 16px;/*preenchimento*/
+    border: 1px solid var(--cor-borda-titulo-cartao);/*cor da borda*/
+    border-radius: 6px;/*arredondamento de bordas*/
+    width: fit-content; /*largura*/
+    margin-inline: auto;
+    margin-bottom: 53px;
+    color: #f7dd43;/*cor do texto */
+}
+/*config. data a direita no topo da caixa*/
+.card h2 span {
+  color: #E1E1E6;  
+  font-size: 14px;/*fonte na caixa span*/
+  text-transform: uppercase;/*tudo em caixa alta*/
+}
+/*configurando campo dos jogos(bandeiras)*/
+.card ul {
+    display: flex;
+    flex-direction: column;/*posicionando jogos em colunas*/
+    gap: 24px;/*espaco entre elementos*/
+    width: 270px;/*largura da caixa preta do cartao*/
+}
+/*organizando  bandeiras*/
+.card ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;/*espaco-entre os elementos*/
+}
+/*config. espaco entre jogos no cartao*/
+.card ul li + li {
+padding-top: 24px;
+border-top: 1px solid #233238;
+}
+/*config. texto do horario*/
+.card ul li strong {
+    font-weight: 900;
+    font-size: 32px;
+    line-height: 125%;
+    color: #c8c8d6;
+}
+/*criando animacoes (eventos)*/
+/*agrupando dois seletores para receber a mesma coisa*/
+.card h2:hover,
+.card ul li strong:hover,/*(hover)seletor; interpretado quando passar mouse sobre*/
+.card ul li img:hover {
+-webkit-animation: scale(1);/*aumenta imagem e texto ao passar mouse sobre*/
+transform: scale(1);
+}
+/*suavizando a transicao criada acima*/
+.card h2:hover,
+.card ul li strong,
+.card ul li img {
+transition: all 0.5s;/*( transform )e a propriedade que sera transicionada*/
+cursor: pointer;
+}
+/*criando animacoes*/
+/*faz o cartao aparecer um por um a cada x segundos de transparente ate visivel*/
+/*iniciando em opacidade 0*/
+@keyframes aparecer {
+0% { 
+    transform: translateY(-50px) ;
+    opacity: 0;/*opacidade '0' transparente*/
+}
+100% {
+    opacity: 1;/*opacidade '1' 100% visivel*/
+}
+}
+/*aplicando a regra criada acima, no cartao*/
+.card {
+    animation: aparecer .7s;
+}
+/*criando animacao para alinhamento de cartoes na pagina*/
+/*ajustando a exibicao de no maximo 2 cartoes em linha para qualquer dispositivo(tela)*/
+@media (min-width: 750px) {
+    /*se a largura minima da tela for de 700px; aplique:*/
+    #cards {
+        max-width: 700px; /*largura maxima para 2 cards*/
+        flex-direction: row;/*alinhando em linha*/
+        flex-wrap: wrap;/*ao atingir a largura maxima(670px) joga o proximo conteudo para baixo*/
+    }
+}
+/*efeito gira cartoes*/
+.card{
+    transition: all 2s;/*velocidade do giro*/
+    cursor: pointer;
+    
+}
+.card:hover{
+   -webkit-transform: rotateZ(360deg);/*giro da carta*/
+   transform: rotateZ(360deg);
+   filter: drop-shadow(15px 10px 5px rgba(213, 233, 99, 0.5));/*cor da sombra*/
+}
+/*fim efeito ampliar nos cartoes*/
+
+/*efeito desfoca cartoes*/
+/*
+.card{
+    transition: all 0.5s;
+    cursor: pointer;
+}
+.card :hover{
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+}
+*/
+/*fim efeito desfoca cartoes*/
+/*efeito de sombra nas bandeiras*/
+.card ul li img{
+    transition: all 0.5s;
+    cursor: pointer;/*transforma ponteiro do mouse*/
+}
+
+.card ul li img:hover{
+    -webkit-filter: drop-shadow(15px 10px 5px rgba(46, 42, 42, 0.082));
+    filter: drop-shadow(15px 10px 5px rgba(213, 233, 99, 0.5));
+}
+/*fim efeito sombra*/
+/*efeito borda na data*/
+.card h2{
+    transition: all .5s;
+}
+.card  h2:hover{
+    border: 10px solid #136497;
+    border-radius: 50%;
+}
+/*fim efeito borda na data*/
+/*inicio efeito giro misto na data/dia*/
+.card h2{
+    transition: all .5s;  
+}
+.card h2:hover{
+    border: 10px solid #e4f551;
+    border-radius: 50%;
+    -webkit-filter: drop-shadow(15px 7px 1px rgba(2, 2, 2, 0.5));
+    filter: drop-shadow(15px 7px 1px rgba(99, 99, 94, 0.945));/*cor de somnra*/
+    -webkit-transform: rotateZ(-360deg) scale(1.5);
+    transform: rotateZ(-360deg) scale(1.5);
+}
+/*fim efeito giro misto na data/dia*/
+/*inicio do efeito mostrar nome*/
+#mostrar{
+    
+    display: none;
+    color: #e4f551; 
+   
+}
+  #passar_mouse:hover #mostrar{
+    display:block;
+    
+}
+    /*fim efeito mostrar nome*/
+    
