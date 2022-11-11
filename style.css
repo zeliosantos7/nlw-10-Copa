@@ -40,8 +40,11 @@ body * {
 }
 /*config. espacamento entre logo e cartao*/
 header {
-    margin-bottom: 63px;/*margem a baixo*/
+    margin-bottom: 63px;/*espacamento da margem ate o logo*/
     text-align: center;/*centralizando lôgo*/
+    
+    width:50%;/*tamanho do logo*/
+    margin: auto;
 }
 #cards {
     display:  flex;/*desbloquea + propriedades*/
