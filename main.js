@@ -1,116 +1,156 @@
-
-
-/*funcao que cria cartoes com(jogo1, hora, jogo2*/ 
-function createdjogos(jogo1, hora,jogo2){
+function createGame(group,player1,hour,player2) {
+  return `
+  <li>
+  <p>Grupo ${group}</p>
+  <div id="passar_mouse"><div class="horario">
+   <div style="width: 90px; height: 80px;">
+   <img src="./assets/icon-${player1}.svg" alt="Bandeira do${player1}"/>
+    <p>${player1.replaceAll("_"," ")}</p>
+    </div>
+    <strong>${hour}</strong>
     
-    return`
     
-    <!--(<a href="***">) cria um link para o site externo-->
-    <!--o que estiver apos o( > ) sera transformado em link e termina com ( </a> )-->
-    <li> 
-                  <!--tag(LI)itens da lista--> 
-    <!--<img src="./assets/icon-${jogo1}.svg" alt="Bandeira do ${jogo1}">-->
-        <div id="passar_mouse"><img src="./assets/icon-${jogo1}.svg"> 
-        <a href="https://www.google.com/search?q=calendario+copa+do+mundo+2022+google&oq=cale&aqs=chrome.1.69i59l2j69i57j69i59j35i39j69i60l3.5579j1j4&sourceid=chrome&ie=UTF-8#sie=lg;/m/0fp_8fm;2;/m/030q7;mt;fp;1;;;">
-         <div id="mostrar">${jogo1}</div></div></a> 
-        <strong>${hora}</strong>                                   <!--tag(strong) hora em negrito-->
-    <!--<img src="./assets/icon-${jogo2}.svg" alt="Bandeira da ${jogo2}">-->
-        <div id="passar_mouse"><img src="./assets/icon-${jogo2}.svg">
-        <a href="https://www.google.com/search?q=calendario+copa+do+mundo+2022+google&oq=cale&aqs=chrome.1.69i59l2j69i57j69i59j35i39j69i60l3.5579j1j4&sourceid=chrome&ie=UTF-8#sie=lg;/m/0fp_8fm;2;/m/030q7;mt;fp;1;;;">
-        <div id="mostrar">${jogo2}</div></div></a> 
-    </li>
-     
-    `
-
+    <div style="width: 90px; height: 80px;">
+    
+    <img src="./assets/icon-${player2}.svg" alt = "Bandeiro do ${player2}" />
+    <p>${player2.replaceAll("_"," ")}</p>
+        
+  </div>   
+  </div>
+</li>
+  `
 }
-/*variavel de controle para o delay entre cartoes*/ 
-let delay = -0.4;
-/*funcao que cria cartoes(data, dia, jogos*/ 
-function createdCard(data, dia, jogos) {
-    
-    delay = delay + 0.4;/*tempo com delay para exibir proximo cartao*/
- return`
- 
- <div class="card" style="animation-delay: ${delay}s">      <!--cartao 1-->
-    <h2>${data} <span>${dia}</span></h2>                    <!--tag(h2)titulo...tag(span)cria diferenciacao no texto em relacao a o que esta dentro do h2-->
-    <ul>                                                    <!--tag(UL)lista ordenada-->
-      ${jogos} 
+let delay = 0
+function createCard(date, day,games){
+  return `
+  <div class="card">
+    <h2>${date} <span>${day}</span></h2>
+    <ul>
+      ${games}
+
     </ul>
-</div>  
- `   
-} 
-/*celecionando elementos, dentro do HTML*/ 
-document.querySelector('#cards').innerHTML=
-//inicio do 1° cartao
-//funcao js que crias os cartoes
-//chamando funcoes
+  </div>
+`
+}
+var nome = window.prompt('Qual é seu nome? ') 
+document.querySelector('#app').innerHTML=` 
+  
+<header>
 
-createdCard('20/11','Domingo',createdjogos('Catar','13:00', 'Equador'))+ //(createdCard cria um cartao)
+  <a href="https://www.google.com/search?q=calendario+copa+do+mundo+2022+google&oq=cale&aqs=chrome.1.69i59l2j69i57j69i59j35i39j69i60l3.5579j1j4&sourceid=chrome&ie=UTF-8#sie=lg;/m/0fp_8fm;2;/m/030q7;mt;fp;1;;;">
+      <img src="./assets/logo-fifa.svg" alt="Logo Copa do Mundo Fifa Qatar 2022" />
+  </a>
+    <ul>
+      <div class="nome">
+        <!-- <a href="https://github.com/zeliosantos7"> -->
+          <h3>Olá <strong>${nome.toUpperCase(nome)}</strong><h3>
+        <!-- <a> -->
+      <div>
+    </ul>
+</header>
+<main id="cards">
+  ${createCard(
+    "20/11",
+    "domingo",
+    createGame("A", "catar", "13:00", "equador")
+  )}
+  ${createCard(
+    "21/11",
+    "segunda-feira",
+    createGame("B", "inglaterra", "10:00", "irã") +
+      createGame("A", "senegal", "13:00", "holanda") +
+      createGame("B", "estados_unidos", "13:00", "gales")
+  )}
+  ${createCard(
+    "22/11",
+    "terça-feira",
+    createGame("C", "argentina", "07:00", "arábia_saudita") +
+      createGame("D", "dinamarca", "10:00", "tunísia") +
+      createGame("C", "méxico", "13:00", "polônia") +
+      createGame("D", "frança", "16:00", "austrália")
+  )}
+  ${createCard(
+    "23/11",
+    "quarta-feira",
+    createGame("F", "marrocos", "07:00", "croácia") +
+      createGame("E", "alemanha", "10:00", "japão") +
+      createGame("E", "espanha", "13:00", "costa_rica") +
+      createGame("F", "bélgica", "16:00", "canadá")
+  )}
+  ${createCard(
+    "24/11",
+    "quinta-feira",
+    createGame("G", "suíça", "07:00", "camarões") +
+      createGame("H", "uruguai", "10:00", "coreia_do_sul") +
+      createGame("H", "portugal", "13:00", "gana") +
+      createGame("G", "brasil", "16:00", "sérvia")
+  )}
+  ${createCard(
+    "25/11",
+    "sexta-feira",
+    createGame("B", "gales", "07:00", "irã") +
+      createGame("A", "catar", "10:00", "senegal") +
+      createGame("A", "holanda", "13:00", "equador") +
+      createGame("B", "inglaterra", "16:00", "estados_unidos")
+  )}
+  ${createCard(
+    "26/11",
+    "sábado",
+    createGame("D", "tunísia", "07:00", "austrália") +
+      createGame("C", "polônia", "10:00", "arábia_saudita") +
+      createGame("D", "frança", "13:00", "dinamarca") +
+      createGame("C", "argentina", "16:00", "méxico")
+  )}
+  ${createCard(
+    "27/11",
+    "domingo",
+    createGame("E", "japão", "07:00", "costa_rica") +
+      createGame("F", "bélgica", "10:00", "marrocos") +
+      createGame("F", "croácia", "13:00", "canadá") +
+      createGame("E", "espanha", "16:00", "alemanha")
+  )}
+  ${createCard(
+    "28/11",
+    "segunda-feira",
+    createGame("G", "camarões", "07:00", "sérvia") +
+      createGame("H", "coreia_do_sul", "10:00", "gana") +
+      createGame("G", "brasil", "13:00", "suíça") +
+      createGame("H", "portugal", "16:00", "uruguai")
+  )}
+  ${createCard(
+    "29/11",
+    "terça-feira",
+    createGame("A", "equador", "12:00", "senegal") +
+      createGame("A", "holanda", "12:00", "catar") +
+      createGame("B", "irã", "16:00", "estados_unidos") +
+      createGame("B", "gales", "16:00", "inglaterra")
+  )}
+  ${createCard(
+    "30/11",
+    "quarta-feira",
+    createGame("D", "tunísia", "12:00", "frança") +
+      createGame("D", "austrália", "12:00", "dinamarca") +
+      createGame("C", "polônia", "16:00", "argentina") +
+      createGame("C", "arábia_saudita", "16:00", "méxico")
+  )}
+  ${createCard(
+    "01/12",
+    "quinta-feira",
+    createGame("F", "croácia", "12:00", "bélgica") +
+      createGame("F", "canadá", "12:00", "marrocos") +
+      createGame("E", "japão", "16:00", "espanha") +
+      createGame("E", "costa_rica", "16:00", "alemanha")
+  )}
+  ${createCard(
+    "02/12",
+    "sexta-feira",
+    createGame("H", "coreia_do_sul", "12:00", "portugal") +
+      createGame("H", "gana", "12:00", "uruguai") +
+      createGame("G", "sérvia", "16:00", "suíça") +
+      createGame("G", "camarões", "16:00", "brasil")
+  )}  
+        
 
-//(createdjogos cria novos jogos dentro do cartao)
+  </main>
 
-//dentro do cartao adicionando mais jogos(concatenando) '+'
-createdCard('21/11', 'Segunda',createdjogos('Inglaterra','10:00', 'Irã') + 
-createdjogos('Senegal','13:00','Holanda')+
-createdjogos('Estados Unidos','16:00','País de Gales'))+
-
-   
-createdCard('22/11', 'Terça',createdjogos('Argentina','07:00', 'Arábia Saudita') + 
-createdjogos('Dinamarca','10:00','Tunisia')+
-createdjogos('México','13:00','Polônia')+
-createdjogos('França','16:00','Austrália')) +
-
-createdCard('23/11', 'Quarta',createdjogos('Marrocos','07:00', 'Croácia') + 
-createdjogos('Alemanha','10:00','Japão')+
-createdjogos('Espanha','13:00','Costa Rica')+
-createdjogos('Bélgica','16:00','Canadá')) +
-
-createdCard('24/11', 'Quinta',createdjogos('Suiça','07:00', 'Camarões') + 
-createdjogos('Uruguai','10:00','Coreia do Sul')+
-createdjogos('Portugal','13:00','Gana')+
-createdjogos('Brasil','16:00','Sérvia')) +
-
-createdCard('25/11', 'Sexta',createdjogos('País de Gales','07:00', 'Irã') + 
-createdjogos('Catar','10:00','Senegal')+
-createdjogos('Holanda','13:00','Equador')+
-createdjogos('Inglaterra','16:00','Estados Unidos')) +
-
-createdCard('26/11', 'Sábado',createdjogos('Tunisia','07:00', 'Austrália') + 
-createdjogos('Polônia','10:00','Arábia Saudita')+
-createdjogos('França','13:00','Dinamarca')+
-createdjogos('Argentina','16:00','México'))+
-
-createdCard('27/11', 'Domingo',createdjogos('Japão','07:00', 'Costa Rica') + 
-createdjogos('Bélgica','10:00','Marrocos')+
-createdjogos('Croácia','13:00','Canadá')+
-createdjogos('Espanha','16:00','Alemanha')) +
-
-createdCard('28/11', 'Segunda',createdjogos('Camarões','07:00', 'Sérvia') + 
-createdjogos('Coreia do Sul','10:00','Gana')+
-createdjogos('Brasil','13:00','Suiça')+
-createdjogos('Portugal','16:00','Uruguai'))+
-
-createdCard('29/11', 'Terça',createdjogos('Equador','12:00', 'Senegal') + 
-createdjogos('Holanda','12:00','Catar')+
-createdjogos('Irã','16:00','Estados Unidos')+
-createdjogos('País de Gales','16:00','Inglaterra'))+
-
-createdCard('30/11', 'Quarta',createdjogos('Tunisia','12:00', 'França') + 
-createdjogos('Austrália','12:00','Dinamarca')+
-createdjogos('Polônia','16:00','Argentina')+
-createdjogos('Arábia Saudita','16:00','México'))+
-
-createdCard('01/12', 'Quinta',createdjogos('Croácia','12:00', 'Bélgica') + 
-createdjogos('Canadá','12:00','Marrocos')+
-createdjogos('Japão','16:00','Espanha')+
-createdjogos('Costa Rica','16:00','Alemanha'))+
-
-createdCard('02/12', 'Sexta',createdjogos('Coreia do Sul','12:00', 'Portugal') + 
-createdjogos('Gana','12:00','Uruguai')+
-createdjogos('Sérvia','16:00','Suiça')+
-createdjogos('Camarões','16:00','Brasil'))
-
-
-
-
-
+` 
